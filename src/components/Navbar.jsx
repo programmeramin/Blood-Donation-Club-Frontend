@@ -113,7 +113,7 @@ const Navbar = () => {
                 Search
               </button>
             </div>
-       </Link>
+       </Link>   
           
 
             {/* Optional Sign Buttons (mobile) */}

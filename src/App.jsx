@@ -1,16 +1,16 @@
 import React from "react";
-import './App.css'
-import Navbar from "./components/Navbar";
-import SignUp from "./features/auth/SignUp";
-import SignIn from "./features/auth/SignIn";
-import OtpVerify from "./features/auth/OtpVerify";
+import './App.css';
+import Navbar from './components/Navbar';
+import ChangePassword from './pages/auth/ChangePassword';
+import SignUp from './pages/auth/SignUp';
+
 
 function App() {
   
   return (
     <>
       <Navbar/>
-      <OtpVerify/>
+     <SignUp/>
     </>
   )   
 }  

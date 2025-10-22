@@ -9,7 +9,7 @@ const SignUp = () => {
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
         <div className="flex flex-col-reverse md:flex-row w-full max-w-5xl bg-white shadow-2xl rounded-2xl overflow-hidden">
           {/* Left Side - Image */}
-          <div className="md:w-1/2 w-full p-2">
+          <div className="md:w-1/2 w-full sm:p-2">
             <img
               src={RegisterImage}
               alt="Blood Donation"
@@ -18,7 +18,7 @@ const SignUp = () => {
           </div>
   
           {/* Right Side - Form */}
-          <div className="md:w-1/2 w-full p-8 flex flex-col justify-center">
+          <div className="md:w-1/2 w-full p-4 sm:p-8 flex flex-col justify-center">
             <h2 className="text-3xl font-bold text-center text-red-600 mb-6">
               🩸 Join as a Donor
             </h2>
@@ -73,7 +73,7 @@ const SignUp = () => {
               </div>
 
               {/* Submit Button */}  
-               <Button/>
+               <Button type="Sign Up"/>
 
               {/* Already Have  Account */}
               <p className="text-center text-medium text-gray-600 mt-3">
