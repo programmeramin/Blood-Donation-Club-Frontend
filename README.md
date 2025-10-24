@@ -1,17 +1,12 @@
-# React + Vite
+# Blood-Donation-Club-Backend
+### This is a blood donation app. It's only created for a blood Donor help through which blood donors can easily donate blood, and those who need blood can And they will be able to find blood donors at their district and upazila levels easily.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Now, here comes how to use the blood donation web application
 
-Currently, two official plugins are available:
+First of all, you have to open an account here; it has to be opened with Gmail or phone number, then an OTP will be sent to Gmail or phone, which has to be verified within 5 minutes; otherwise, the account will be automatically deleted. Then again, you have to register.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Since we are not yet able to deploy our backend system to the premium version, it will be a bit difficult to open an account with Gmail. So, you will create an account phone number, please.
 
-## React Compiler
+If you want to set up the account within 30 days of opening it, and if it is not filled 100%, you will have to delete it again after 30 days. Because if the account is not set up completely, then those who need blood cannot easily find the donor and get all their information.
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# Blood-Donation-Club-Frontend
+This application is being made to assist those who truly need blood and are in critical need. Only those who are authentic users and really donate blood will be placed here after verification.
