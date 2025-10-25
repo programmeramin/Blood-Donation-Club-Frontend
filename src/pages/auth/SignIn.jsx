@@ -1,9 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LoginLogo from "/src/assets/img/register-img.png";
-import Button from "../../components/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { authSelect, setMessageEmpty } from "../../features/auth/authSlice";
+import { signIn } from "../../features/auth/authApiSlice";
+import useForm from "../../hooks/useForm";
+import { toast } from "react-toastify";
 
 const SignIn = () => {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {error, message, loading} = useSelector(authSelect);
+  const {input, handleInputChange, formReset} = useForm({
+    auth: "",
+    password: "",
+  });
+
+
+  const handleSubmit = (e) =>{
+    e.preventDefault();
+    dispatch(signIn(input))
+  }
+
+  useEffect(() =>{
+    if(message){
+      toast(message, {type : "success"});
+      formReset();
+      setMessageEmpty();
+      navigate("/")
+    }
+
+    if(error){
+      toast(error, {type : "error"});
+      
+    }
+
+  })
+
   return (
     <>
       <div className="min-h-screen flex justify-center items-center bg-gray-100">
@@ -19,7 +53,7 @@ const SignIn = () => {
               🩸 Join as a Donor
             </h2>
 
-            <form className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               {/** Email or Phone */}
               <div>
                 <label className="block text-sm font-medium text-gray-800 mb-1">
@@ -28,6 +62,9 @@ const SignIn = () => {
 
                 <input
                   type="text"
+                  name="auth"
+                  value={input.auth}
+                  onChange={handleInputChange}
                   placeholder="Enter Email or Phone......"
                   className="w-full border border-gray-300 rounded-lg px-2 py-2 focus:ring-2 focus:ring-red-400 outline-none"
                 />
@@ -42,6 +79,9 @@ const SignIn = () => {
 
                 <input
                   type="text"
+                  name="password"
+                  value={input.password}
+                  onChange={handleInputChange}
                   placeholder="Enter Your Password"
                   className="w-full border border-gray-300 px-3 py-2 rounded-lg focus:ring-2 focus:ring-red-400 outline-none mb-3"
                 />
@@ -59,7 +99,9 @@ const SignIn = () => {
               </p>
 
               {/** submit button */}
-              <Button type="Sign In"/>
+              <button type="submit" className="w-full text-medium px-2 sm:text-2xl sm:px-2 py-2 bg-gradient-to-r from-indigo-800 via-purple-900 to-pink-800 rounded-lg text-white cursor-pointer mb-3">
+                  {loading ? "Loading..." : "Sign In"}
+              </button>
             </form>
             {/** Already have an account */}
             <p className="text-center text-medium text-gray-800 mt-4">

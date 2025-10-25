@@ -1,15 +1,16 @@
+// src/app/store.js
 import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "../features/auth/authSlice";
+import donorAuthReducer from "../features/auth/authSlice";
 
+ const store = configureStore({
+  reducer: {
+    donorAuth: donorAuthReducer,
+  },
 
-// create store
-const store = configureStore({
-    reducer : {
-        donorAuth : authReducer,
-
-    },
-    middleware : (getDefaultMiddlewares) => getDefaultMiddlewares(),
+  middleware : (getDefaultMiddlewares) =>
+    getDefaultMiddlewares(),
     devTools : true,
+    preloadedState: {}, // initial state
 });
 
 

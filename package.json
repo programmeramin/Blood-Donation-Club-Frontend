@@ -4,12 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "react-scripts start",
     "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "mobile": "HOST=0.0.0.0 react-scripts start"
+    "build": "vite build"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -24,6 +20,7 @@
     "react-hook-form": "^7.65.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.9.4",
+    "react-toastify": "^11.0.5",
     "redux-persist": "^6.0.0",
     "tailwindcss": "^4.1.14"
   },
