@@ -30,7 +30,7 @@ const SignUp = () => {
       toast(message, {type : "success"});
       formReset();
       dispatch(setMessageEmpty());
-      navigate("/otp-verify");
+      window.location.href = "/otp-verify";
     }
 
     if (error) {

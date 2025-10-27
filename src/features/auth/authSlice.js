@@ -1,9 +1,11 @@
 // src/features/auth/authSlice.js
 import { createSlice } from "@reduxjs/toolkit";
-import { registerDonor, signIn, verifyOtp } from "./authApiSlice";
+import { getLoggedInUser, registerDonor, signIn, verifyOtp } from "./authApiSlice";
+
+
 
 const initialState = {
-  user: null,
+  user: localStorage.getItem("loginUser") ? JSON.parse(localStorage.getItem("loginUser")) : null,
   token: null,
   loading: false,
   message: null,
@@ -33,8 +35,7 @@ const authSlice = createSlice({
       .addCase(registerDonor.fulfilled, (state, action) => {
         state.loading = false;
         state.message = action.payload.message;
-        state.user = action.payload.user || null; // optional
-        state.token = action.payload.token || null; // optional
+       // state.user = action.payload.user || null; // optional
       })
       .addCase(registerDonor.rejected, (state, action) => {
         state.loading = false;
@@ -64,13 +65,34 @@ const authSlice = createSlice({
       .addCase(signIn.fulfilled, (state, action) => {
         state.loading = false;
         state.message = action.payload.message;
-        state.user = action.payload.user || null;
-        state.token = action.payload.token || null;
+        state.user = action.payload.user ; 
+
+         // ✅ LocalStorage set user
+        localStorage.setItem("loginUser", JSON.stringify(action.payload.user));
+        
       })
       .addCase(signIn.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || action.error.message;
         state.message = null;
+      })
+      .addCase(getLoggedInUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.message = null;
+      })
+      .addCase(getLoggedInUser.fulfilled, (state, action) =>{
+        state.loading = false;
+        state.error = null;
+        state.user = action.payload.donorAuth;
+        localStorage.setItem("loginUser", JSON.stringify(action.payload.donorAuth));
+        
+      })
+      .addCase(getLoggedInUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || action.error.message;
+        state.user = null;
+        localStorage.removeItem("loginUser");
       });
   },
 });

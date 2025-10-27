@@ -66,7 +66,7 @@ const OtpVerify = () => {
       toast(message, {type : "success" });
       formReset();
       dispatch(setMessageEmpty());
-      navigate("/sign-in");
+      window.location.href = "/sign-in";
     
     }
 

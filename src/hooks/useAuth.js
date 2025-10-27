@@ -1,14 +1,15 @@
-import { useSelector } from "react-redux";
-import { authSelect } from '../features/auth/authSlice';
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { getLoggedInUser } from '../features/auth/authApiSlice';
 
+const useAuth = () => {
+  
+    const dispatch = useDispatch();
 
-const useAuth = () =>{
-    const {user} = useSelector(authSelect);
-   // console.log(user);
-    
-    return {donorAuth : user};
- 
-    
+    useEffect(() =>{
+        dispatch(getLoggedInUser());
+    }, [dispatch]);
+
 }
 
-export default useAuth;
+export default useAuth

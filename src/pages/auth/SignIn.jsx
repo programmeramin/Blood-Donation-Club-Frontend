@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import LoginLogo from "/src/assets/img/register-img.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authSelect, setMessageEmpty } from "../../features/auth/authSlice";
 import { signIn } from "../../features/auth/authApiSlice";
@@ -10,17 +10,18 @@ import { toast } from "react-toastify";
 const SignIn = () => {
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const {error, message, loading} = useSelector(authSelect);
   const {input, handleInputChange, formReset} = useForm({
     auth: "",
     password: "",
   });
 
-
-  const handleSubmit = (e) =>{
+  
+  const handleSubmit = async (e) =>{
     e.preventDefault();
-    dispatch(signIn(input))
+    const res = await dispatch(signIn(input));
+   localStorage.setItem("loginUser", JSON.stringify(res.payload.loginUserToken));
+   
   }
 
   useEffect(() =>{
@@ -28,7 +29,8 @@ const SignIn = () => {
       toast(message, {type : "success"});
       formReset();
       setMessageEmpty();
-      navigate("/")
+      window.location.href = "/dashboard";
+      
     }
 
     if(error){
@@ -41,7 +43,7 @@ const SignIn = () => {
   return (
     <>
       <div className="min-h-screen flex justify-center items-center bg-gray-100">
-        <div className="flex flex-col-reverse md:flex-row w-full max-w-5xl mt-15 bg-white rounded-2xl shadow-2xl overflow-hidden">
+        <div className="flex flex-col-reverse md:flex-row w-full max-w-5xl my-15 bg-white rounded-2xl shadow-2xl overflow-hidden">
           {/** Left side image */}
           <div className="md:w-1/2 flex">
             <img src={LoginLogo} alt="login side img"/>

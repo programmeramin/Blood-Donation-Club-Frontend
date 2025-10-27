@@ -1,7 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import API from "../../utils/api.js";
-import { data } from "react-router-dom";
-
 
 // register donor
 export const registerDonor = createAsyncThunk(
@@ -45,10 +43,27 @@ export const signIn = createAsyncThunk("auth/signIn",
       const response = await API.post("/api/v1/auth/sign-in", data, {
         withCredentials : true,
       });
+       
       return response.data;
     } catch (error) {
        throw rejectWithValue(
         error.response?.data?.message || "Sign in failed"
+       )
+    }
+  }
+)
+
+// Get logged in user
+export const getLoggedInUser = createAsyncThunk("auth/getLoggedInUser", 
+  async (_, { rejectWithValue}) =>{
+    try {
+      const response = await API.get("/api/v1/auth/me", {
+        withCredentials : true,
+      });
+      return response.data;
+    } catch (error) {
+       throw rejectWithValue(
+        error.response?.data?.message || "Fetching user failed",
        )
     }
   }

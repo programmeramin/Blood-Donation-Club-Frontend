@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import HeadLogo from "/src/assets/img/logo.png";
 import { Menu, X } from "lucide-react";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+   const { donorAuth} = useSelector((state) => state.donorAuth);
+
+   console.log("user data", donorAuth);
+   
 
   return (
     <>
@@ -53,12 +59,34 @@ const Navbar = () => {
 
             {/* Right Buttons */}
             <div className="hidden md:flex items-center gap-3">
-              <button className="px-4 py-1.5 text-sm font-medium border border-red-600 text-red-600 rounded-full hover:bg-red-50 transition-all duration-200">
-                Sign In
-              </button>
-              <button className="px-4 py-1.5 text-sm font-medium bg-red-600 text-white rounded-full hover:bg-red-700 shadow-md transition-all duration-200">
-                Sign Up
-              </button>
+              {donorAuth ? (
+                ""
+              ) : (
+                <>
+                  <Link
+                    to="/sign-in"
+                    className="px-4 py-1.5 text-sm font-medium border border-red-600 text-red-600 rounded-full hover:bg-red-50 transition-all duration-200"
+                  >
+                    Sign In
+                  </Link>
+                  <Link
+                    to="/sign-up"
+                    className="px-4 py-1.5 text-sm font-medium bg-red-600 text-white rounded-full hover:bg-red-700 shadow-md transition-all duration-200"
+                  >
+                    Sign Up
+                  </Link>
+                </>
+              )}
+            </div> 
+
+            <div>
+              {donorAuth ? (
+                <button>
+                  <img src="hello" alt="profile-img" />
+                </button>
+              ) : (
+                <span>""</span>
+              )}
             </div>
 
             {/* Mobile Menu Toggle */}
@@ -102,19 +130,18 @@ const Navbar = () => {
               CONTACT
             </Link>
 
-       <Link to="/" onClick={() => setIsOpen(false)}>
-           <div className="relative w-full max-w-sm">
-              <input
-                type="text"
-                placeholder="🔍 Search blood donors, district, or group..."
-                className="w-full bg-white border rounded-full py-2 pl-3 pr-20 outline-none text-sm text-gray-700 shadow-sm"
-              />
-              <button className="absolute right-1 top-1 bottom-1 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded-full px-4 transition-all duration-200">
-                Search
-              </button>
-            </div>
-       </Link>   
-          
+            <Link to="/" onClick={() => setIsOpen(false)}>
+              <div className="relative w-full max-w-sm">
+                <input
+                  type="text"
+                  placeholder="🔍 Search blood donors, district, or group..."
+                  className="w-full bg-white border rounded-full py-2 pl-3 pr-20 outline-none text-sm text-gray-700 shadow-sm"
+                />
+                <button className="absolute right-1 top-1 bottom-1 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded-full px-4 transition-all duration-200">
+                  Search
+                </button>
+              </div>
+            </Link>
 
             {/* Optional Sign Buttons (mobile) */}
             <div className="flex gap-3 pt-2">
