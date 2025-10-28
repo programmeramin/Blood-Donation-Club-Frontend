@@ -6,7 +6,7 @@ import { Navigate, Outlet } from "react-router-dom";
 
 const PrivateRoute = () => {
    const { user } = useSelector((state) => state.donorAuth);
-  
+   
   if (!user) {
     return <Navigate to="/sign-in" replace />;
   }

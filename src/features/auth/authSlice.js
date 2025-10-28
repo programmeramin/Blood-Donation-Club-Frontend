@@ -3,10 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getLoggedInUser, registerDonor, signIn, verifyOtp } from "./authApiSlice";
 
 
-
 const initialState = {
-  user: localStorage.getItem("loginUser") ? JSON.parse(localStorage.getItem("loginUser")) : null,
-  token: null,
+  user : localStorage.getItem("loginUser") ? JSON.parse(localStorage.getItem("loginUser")) : null,
   loading: false,
   message: null,
   error: null,
@@ -50,7 +48,7 @@ const authSlice = createSlice({
       .addCase(verifyOtp.fulfilled, (state, action) =>{
         state.loading = false;
         state.message = action.payload.message;
-        state.error = null;
+        state.user = action.payload.user ;
       })
       .addCase(verifyOtp.rejected, (state, action) => {
         state.loading = false;
@@ -66,10 +64,6 @@ const authSlice = createSlice({
         state.loading = false;
         state.message = action.payload.message;
         state.user = action.payload.user ; 
-
-         // ✅ LocalStorage set user
-        localStorage.setItem("loginUser", JSON.stringify(action.payload.user));
-        
       })
       .addCase(signIn.rejected, (state, action) => {
         state.loading = false;
@@ -79,20 +73,18 @@ const authSlice = createSlice({
       .addCase(getLoggedInUser.pending, (state) => {
         state.loading = true;
         state.error = null;
-        state.message = null;
       })
       .addCase(getLoggedInUser.fulfilled, (state, action) =>{
         state.loading = false;
+        state.user = action.payload.user;
         state.error = null;
-        state.user = action.payload.donorAuth;
-        localStorage.setItem("loginUser", JSON.stringify(action.payload.donorAuth));
+        
         
       })
-      .addCase(getLoggedInUser.rejected, (state, action) => {
+      .addCase(getLoggedInUser.rejected, (state, action ) => {
         state.loading = false;
-        state.error = action.payload || action.error.message;
+        state.error = action.error;
         state.user = null;
-        localStorage.removeItem("loginUser");
       });
   },
 });

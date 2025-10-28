@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import HeadLogo from "/src/assets/img/logo.png";
 import { Menu, X } from "lucide-react";
-import { useSelector } from "react-redux";
+import useAuth from "../hooks/useAuth";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-   const { donorAuth} = useSelector((state) => state.donorAuth);
+   const { user } = useAuth();
 
-   console.log("user data", donorAuth);
+   console.log("Navbar User : ", user);
    
 
   return (
@@ -59,8 +59,8 @@ const Navbar = () => {
 
             {/* Right Buttons */}
             <div className="hidden md:flex items-center gap-3">
-              {donorAuth ? (
-                ""
+              {user ? (
+                <></>
               ) : (
                 <>
                   <Link
@@ -80,8 +80,9 @@ const Navbar = () => {
             </div> 
 
             <div>
-              {donorAuth ? (
+              {user ? (
                 <button>
+                  <span>{user.name}</span>
                   <img src="hello" alt="profile-img" />
                 </button>
               ) : (

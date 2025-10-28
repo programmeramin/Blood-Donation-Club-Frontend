@@ -43,10 +43,11 @@ export const signIn = createAsyncThunk("auth/signIn",
       const response = await API.post("/api/v1/auth/sign-in", data, {
         withCredentials : true,
       });
-       
-      return response.data;
+      
+           return response.data;
+
     } catch (error) {
-       throw rejectWithValue(
+       return rejectWithValue(
         error.response?.data?.message || "Sign in failed"
        )
     }
@@ -60,9 +61,10 @@ export const getLoggedInUser = createAsyncThunk("auth/getLoggedInUser",
       const response = await API.get("/api/v1/auth/me", {
         withCredentials : true,
       });
-      return response.data;
+      
+      return response.data; 
     } catch (error) {
-       throw rejectWithValue(
+       return rejectWithValue(
         error.response?.data?.message || "Fetching user failed",
        )
     }

@@ -20,8 +20,9 @@ const SignIn = () => {
   const handleSubmit = async (e) =>{
     e.preventDefault();
     const res = await dispatch(signIn(input));
-   localStorage.setItem("loginUser", JSON.stringify(res.payload.loginUserToken));
-   
+    if(res.type === "auth/signIn/fulfilled"){
+      localStorage.setItem("loginUser", JSON.stringify(res.payload.loginUser));
+    }
   }
 
   useEffect(() =>{
@@ -108,7 +109,7 @@ const SignIn = () => {
             {/** Already have an account */}
             <p className="text-center text-medium text-gray-800 mt-4">
               Don't have an account {""}
-              <Link to="/register" className="text-pink-800 underline">
+              <Link to="/sign-up" className="text-pink-800 underline">
                 Register
               </Link>   
             </p>
@@ -119,4 +120,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignIn

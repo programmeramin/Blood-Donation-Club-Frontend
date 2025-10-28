@@ -2,17 +2,20 @@
 import { configureStore } from "@reduxjs/toolkit";
 import donorAuthReducer from "../features/auth/authSlice";
 
- const store = configureStore({
-  reducer: {
-    donorAuth: donorAuthReducer,
-  },
 
-  middleware : (getDefaultMiddlewares) =>
-    getDefaultMiddlewares(),
-    devTools : true,
-    preloadedState: {}, // initial state
+
+// ✅ Configure store
+export const store = configureStore({
+  reducer: {
+    donorAuth: donorAuthReducer
+  },
+  middleware: (getDefaultMiddlewares) =>
+    getDefaultMiddlewares({
+      serializableCheck: false, // Redux Persist এর জন্য serializable check disable
+    }),
+  devTools: true,
 });
 
 
-// export store
-export default store
+
+export default store;
