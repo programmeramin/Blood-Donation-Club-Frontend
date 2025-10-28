@@ -3,7 +3,7 @@ import axios from "axios";
 
 // create axios instant
 const API = axios.create({
-    baseURL : "http://localhost:5050",
+    baseURL : "https://blood-donation-club-backend-hj2h.onrender.com",
     timeout : 20000,
     withCredentials : true,
     headers : {},
@@ -11,7 +11,6 @@ const API = axios.create({
         host : ""
     }
 });
-
 
 // export default
 export default API
